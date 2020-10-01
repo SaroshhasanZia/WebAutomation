@@ -38,6 +38,8 @@ public class Checkbox {
         options.get( 1 ).click();
         options.get( 2 ).click();
 
+        //check to see the changes
+
 
         sleep(2000);
 
