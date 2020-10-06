@@ -10,34 +10,50 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 public class DatePickerExample {
 
+    static void datefinder(String date){
+        System.setProperty( "webdriver.chrome.driver", "C:\\Users\\VenD\\Desktop\\chromedriver.exe" );
+        System.setProperty( ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true" );
+        ChromeDriver driver = new ChromeDriver();
+        driver.get( "https://www.seleniumeasy.com/test/bootstrap-date-picker-demo.html" );
+        driver.manage().window().maximize();
 
-    @Test
-    public void jQueryCalendarExample() {
-        driver.navigate().to(jQueryURL);
-        WebElement frameElement=driver.findElement(frameLocator);
-        driver.switchTo().frame(frameElement);
-        wait.until(ExpectedConditions.presenceOfElementLocated(tagText));
-        driver.findElement(tagText).click();
-        selectJQueryDate("21");
-    }
+        driver.findElement( By.xpath( "/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/span[1]" ) ).click();
 
-    public void selectJQueryDate(String date) {
+        List<WebElement> table = driver.findElements( By.xpath( "/html[1]/body[1]/div[3]/div[1]/table[1]/tbody[1]/tr" ) );
+        for (WebElement row : table) {
 
-        wait.until( ExpectedConditions.presenceOfElementLocated(By.id("ui-datepicker-div")));
-        WebElement table = driver.findElement(By.className("ui-datepicker-calendar"));
-        System.out.println("JQuery Calendar Dates");
-
-        List<WebElement> tableRows = table.findElements(By.xpath("//tr"));
-        for (WebElement row : tableRows) {
-            List<WebElement> cells = row.findElements(By.xpath("td"));
-
+            List<WebElement> cells = row.findElements( By.xpath( "/ td" ) );
             for (WebElement cell : cells) {
-                if (cell.getText().equals(date)) {
-                    driver.findElement(By.linkText(date)).click();
+                if (cell.getText().equals( date )) {
+                    driver.findElement( By.xpath( "/html[1]/body[1]/div[3]/div[1]/table[1]/tbody[1]/tr[1]/td[4]" ) ).click();
+                    break;
                 }
+
             }
         }
+       // driver.quit();
+       // System.exit( 0 );
+//    List<WebElement> tableRows = table.findElements( By.xpath( "//tr" ) );
+//    for (WebElement row : tableRows) {
+//        List<WebElement> cells = row.findElements( By.xpath( "td" ) );
+//
+//        for (WebElement cell : cells) {
+//            if (cell.getText().equals( date )) {
+//                driver.findElement( By.linkText( date ) ).click();
+//            }
+//        }
+//    }
+
+
     }
+
+    public static void main(String[] args) {
+        datefinder( "1" );
+    }
+
 }
+
