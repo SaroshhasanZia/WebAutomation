@@ -13,13 +13,14 @@ import static java.lang.Thread.sleep;
 
 public class fileUpload {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\VenD\\Desktop\\chromedriver.exe");
         System.setProperty( ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY,"true");
 
         ChromeDriver driver = new ChromeDriver();
         driver.get("http://demo.guru99.com/test/upload/");
         driver.manage().window().maximize();
+        sleep(2000);
 
 
 //        driver.setFileDetector(new LocalFileDetector());
